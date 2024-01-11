@@ -17,8 +17,11 @@ export const keywordSlice = createSlice({
     keywordOnChange: (state, action) => {
       state.value = action.payload;
     },
+    deleteKeyword: (state) => {
+      state.value = "";
+    },
   },
 });
 
-export const { keywordOnChange } = keywordSlice.actions;
+export const { keywordOnChange, deleteKeyword } = keywordSlice.actions;
 export default keywordSlice.reducer;
