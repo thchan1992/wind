@@ -19,7 +19,9 @@ const Search = () => {
   const dispatch = useDispatch();
   const keyword = useSelector((state: RootState) => state.keyword.value);
   const showBoard = useSelector((state: RootState) => state.showBoard.value);
-
+  const ingredientList = useSelector(
+    (state: RootState) => state.ingredientList.value
+  );
   const ingredientSearchRes = useSelector(
     (state: RootState) => state.ingredientSearchRes.value
   );
@@ -36,18 +38,19 @@ const Search = () => {
       <button
         className={primaryButtonStyle}
         onClick={async () => {
-          if (keyword !== "") {
+          if (keyword !== "" && ingredientList.length < 10) {
             const res = await requestIngredient(keyword);
             dispatch(deleteKeyword());
             dispatch(ingredientSearchResOnChange(res));
           } else {
-            console.log("no keyword is detected");
+            console.log(
+              "no keyword is detected or ingredient list is getting too big"
+            );
           }
         }}
       >
         Search
       </button>
-
       {ingredientSearchRes.map((obj, i) => {
         return (
           <div
