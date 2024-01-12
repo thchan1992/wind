@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import React from "react";
 import { primaryButtonStyle } from "@/util/styles";
 import type { RootState } from "../../lib/store";
@@ -14,6 +15,7 @@ import {
 import useIngredientList from "../hooks/useIngredientList";
 import SeasoningBoard from "./SeasoningBoard";
 import { requestRecipe } from "@/services/recipeService";
+import { setRecipe } from "@/lib/features/recipe/recipeSlice";
 
 export default function Ingredients() {
   const dispatch = useDispatch();
@@ -71,12 +73,12 @@ export default function Ingredients() {
       </button>
       {showBoard === BoardStatus.SeasoningBoard && <SeasoningBoard />}
       <button
-        onClick={() => {
-          console.log("pressed");
-          requestRecipe(ingredientList, seasoningList);
+        onClick={async () => {
+          const data = await requestRecipe(ingredientList, seasoningList);
+          dispatch(setRecipe(data));
         }}
       >
-        submit
+        <Link href="/recipe">submit</Link>
       </button>
     </div>
   );

@@ -66,6 +66,7 @@ export const requestRecipe = async (
     }
     const data = await response.json();
     console.log("API Response:", data.choices[0].message.content);
+    return data.choices[0].message.content;
   } catch (e) {
     console.error(e);
   }

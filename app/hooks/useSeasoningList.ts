@@ -9,17 +9,28 @@ const useSeasoningList = () => {
     (state: RootState) => state.seasoningList.value
   );
   useEffect(() => {
-    const localData = localStorage.getItem("seasoningList");
-    if (localData) {
-      const seasonings: string[] = JSON.parse(localData);
-      seasonings.forEach((seasoning) => {
-        dispatch(setSeasonings(seasoning));
-      });
+    try {
+      const localData = localStorage.getItem("seasoningList");
+      if (localData) {
+        const seasonings: string[] = JSON.parse(localData);
+
+        if (seasoningList.length === 0) {
+          seasonings.forEach((seasoning) => {
+            dispatch(setSeasonings(seasoning));
+          });
+        }
+      }
+    } catch (e) {
+      console.error(e);
     }
   }, [dispatch]);
 
   useEffect(() => {
-    localStorage.setItem("seasoningList", JSON.stringify(seasoningList));
+    try {
+      localStorage.setItem("seasoningList", JSON.stringify(seasoningList));
+    } catch (e) {
+      console.error(e);
+    }
   }, [seasoningList]);
   return seasoningList;
 };

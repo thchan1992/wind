@@ -13,17 +13,28 @@ const useIngredientList = () => {
   );
 
   useEffect(() => {
-    const localData = localStorage.getItem("ingredientList");
-    if (localData) {
-      const ingredients: Ingredient[] = JSON.parse(localData);
-      ingredients.forEach((ingredient) => {
-        dispatch(setIngredients(ingredient));
-      });
+    try {
+      const localData = localStorage.getItem("ingredientList");
+      if (localData) {
+        const ingredients: Ingredient[] = JSON.parse(localData);
+        if (ingredientList.length === 0) {
+          ingredients.forEach((ingredient) => {
+            dispatch(setIngredients(ingredient));
+          });
+        }
+      }
+    } catch (e) {
+      console.error(e);
     }
   }, [dispatch]);
 
   useEffect(() => {
-    localStorage.setItem("ingredientList", JSON.stringify(ingredientList));
+    console.log(ingredientList, " saving the ingredient list");
+    try {
+      localStorage.setItem("ingredientList", JSON.stringify(ingredientList));
+    } catch (e) {
+      console.error(e);
+    }
   }, [ingredientList]);
 
   return ingredientList;
