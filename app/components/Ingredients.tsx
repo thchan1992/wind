@@ -74,8 +74,12 @@ export default function Ingredients() {
       {showBoard === BoardStatus.SeasoningBoard && <SeasoningBoard />}
       <button
         onClick={async () => {
-          const data = await requestRecipe(ingredientList, seasoningList);
-          dispatch(setRecipe(data));
+          if (ingredientList.length !== 0) {
+            const data = await requestRecipe(ingredientList, seasoningList);
+            dispatch(setRecipe(data));
+          } else {
+            console.log("no ingredient detected");
+          }
         }}
       >
         <Link href="/recipe">submit</Link>
