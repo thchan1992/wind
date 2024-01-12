@@ -13,6 +13,7 @@ import {
 
 import useIngredientList from "../hooks/useIngredientList";
 import SeasoningBoard from "./SeasoningBoard";
+import { requestRecipe } from "@/services/recipeService";
 
 export default function Ingredients() {
   const dispatch = useDispatch();
@@ -20,6 +21,9 @@ export default function Ingredients() {
   // const ingredientList = useSelector(
   //   (state: RootState) => state.ingredientList.value
   // );
+  const seasoningList = useSelector(
+    (state: RootState) => state.seasoningList.value
+  );
   const showBoard = useSelector((state: RootState) => state.showBoard.value);
 
   const [ingredientIndex, setIngredientIndex] = useState<number | null>(null);
@@ -66,6 +70,14 @@ export default function Ingredients() {
         seasoning
       </button>
       {showBoard === BoardStatus.SeasoningBoard && <SeasoningBoard />}
+      <button
+        onClick={() => {
+          console.log("pressed");
+          requestRecipe(ingredientList, seasoningList);
+        }}
+      >
+        submit
+      </button>
     </div>
   );
 }
