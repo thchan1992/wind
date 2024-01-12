@@ -51,6 +51,7 @@ const Search = () => {
       >
         Search
       </button>
+
       {ingredientSearchRes.map((obj, i) => {
         return (
           <div
