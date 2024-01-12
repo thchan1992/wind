@@ -12,6 +12,7 @@ import {
 } from "@/lib/features/showBoard/showBoardSlice";
 
 import useIngredientList from "../hooks/useIngredientList";
+import SeasoningBoard from "./SeasoningBoard";
 
 export default function Ingredients() {
   const dispatch = useDispatch();
@@ -54,6 +55,17 @@ export default function Ingredients() {
       {showBoard === BoardStatus.ModifyIngredientBoard && (
         <IngredientBoard index={ingredientIndex} />
       )}
+      <button
+        onClick={() => {
+          console.log("pressed");
+          showBoard !== BoardStatus.SeasoningBoard
+            ? dispatch(setShowBoard(BoardStatus.SeasoningBoard))
+            : dispatch(setShowBoard(BoardStatus.Closed));
+        }}
+      >
+        seasoning
+      </button>
+      {showBoard === BoardStatus.SeasoningBoard && <SeasoningBoard />}
     </div>
   );
 }
