@@ -15,6 +15,7 @@ import {
   setShowBoard,
 } from "@/lib/features/showBoard/showBoardSlice";
 import { primaryButtonStyle } from "@/util/styles";
+import SavedRecipes from "./SavedRecipes";
 const Search = () => {
   const dispatch = useDispatch();
   const keyword = useSelector((state: RootState) => state.keyword.value);
@@ -28,6 +29,14 @@ const Search = () => {
 
   return (
     <div className="border-solid border-2 border-indigo-600">
+      <button
+        onClick={() => {
+          dispatch(setShowBoard(BoardStatus.SavedRecipesList));
+        }}
+      >
+        Saved Recipes
+      </button>
+
       <input
         type="text"
         value={keyword}
@@ -69,6 +78,7 @@ const Search = () => {
       {showBoard === BoardStatus.IngredientBoard && (
         <IngredientBoard index={null} />
       )}
+      {showBoard === BoardStatus.SavedRecipesList && <SavedRecipes />}
     </div>
   );
 };

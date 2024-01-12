@@ -7,6 +7,7 @@ export enum BoardStatus {
   IngredientBoard = "INGREDIENTBOARD",
   SeasoningBoard = "SEASONINGBOARD",
   ModifyIngredientBoard = "MODIFYINGREDIENTBOARD",
+  SavedRecipesList = "SAVEDRECIPESLIST",
 }
 
 export interface ShowBoardState {

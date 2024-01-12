@@ -2,11 +2,11 @@
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 export interface RecipeState {
-  value: string[];
+  value: string;
 }
 
 const initialState: RecipeState = {
-  value: [],
+  value: "",
 };
 
 export const recipeSlice = createSlice({
@@ -14,9 +14,9 @@ export const recipeSlice = createSlice({
   initialState,
   reducers: {
     setRecipe: (state, action: PayloadAction<string>) => {
-      const arr = action.payload.split("★");
+      // const arr = action.payload.split("★");
 
-      state.value = arr;
+      state.value = action.payload;
     },
   },
 });
