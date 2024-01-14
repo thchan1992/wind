@@ -5,7 +5,7 @@ import Search from "./components/Search";
 
 export default function Home() {
   return (
-    <div className={"flex justify-center flex-col items-center"}>
+    <div className={"flex flex-col items-center p-5 h-screen"}>
       <Search />
       <Ingredients />
     </div>
