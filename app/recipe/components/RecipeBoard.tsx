@@ -110,7 +110,7 @@ export default function RecipeBoard() {
           >
             {copy}
           </button>
-          <FacebookShareButton url={recipeForSaving}>
+          {/* <FacebookShareButton url={recipeForSaving}>
             <FacebookIcon size={48} round />
           </FacebookShareButton>
           <TwitterShareButton url={recipeForSaving}>
@@ -118,7 +118,7 @@ export default function RecipeBoard() {
           </TwitterShareButton>
           <WhatsappShareButton url={recipeForSaving}>
             <WhatsappIcon size={48} round />
-          </WhatsappShareButton>
+          </WhatsappShareButton> */}
         </div>
       </div>
     </div>
