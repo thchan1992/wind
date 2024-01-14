@@ -63,6 +63,7 @@ export default function IngredientBoard({ index }: IngredientBoardProps) {
             {measurementOpt.map((measurement, i) => {
               return (
                 <li
+                  key={i}
                   onClick={() => {
                     setUnit(measurement.unit);
                   }}
