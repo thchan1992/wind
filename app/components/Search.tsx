@@ -16,6 +16,7 @@ import {
 } from "@/lib/features/showBoard/showBoardSlice";
 import { primaryButtonStyle } from "@/util/styles";
 import SavedRecipes from "./SavedRecipes";
+import Warning from "./Warning";
 const Search = () => {
   const dispatch = useDispatch();
   const keyword = useSelector((state: RootState) => state.keyword.value);
@@ -27,58 +28,111 @@ const Search = () => {
     (state: RootState) => state.ingredientSearchRes.value
   );
 
+  const ingredientIndex = useSelector(
+    (state: RootState) => state.ingerdientIndex.value
+  );
+  const openModal = (): void => {
+    const modal = document.getElementById("my_modal");
+    if (modal instanceof HTMLDialogElement) {
+      modal.showModal();
+    }
+  };
+
+  const closeModal = (): void => {
+    const modal = document.getElementById("my_modal");
+    if (modal instanceof HTMLDialogElement) {
+      modal.close();
+    }
+  };
+
   return (
-    <div className="border-solid border-2 border-indigo-600">
-      <button
-        onClick={() => {
-          dispatch(setShowBoard(BoardStatus.SavedRecipesList));
-        }}
-      >
-        Saved Recipes
-      </button>
-
-      <input
-        type="text"
-        value={keyword}
-        onChange={(e) => {
-          dispatch(keywordOnChange(e.target.value));
-        }}
-      />
-      <button
-        className={primaryButtonStyle}
-        onClick={async () => {
-          if (keyword !== "" && ingredientList.length < 10) {
-            const res = await requestIngredient(keyword);
-            dispatch(deleteKeyword());
-            dispatch(ingredientSearchResOnChange(res));
-          } else {
-            console.log(
-              "no keyword is detected or ingredient list is getting too big"
-            );
-          }
-        }}
-      >
-        Search
-      </button>
-
-      {ingredientSearchRes.map((obj, i) => {
-        return (
-          <div
-            key={i}
-            onClick={() => {
-              dispatch(ingredientSearchResOnChange([]));
-              dispatch(setChosenIngredient(obj));
-              dispatch(setShowBoard(BoardStatus.IngredientBoard));
-            }}
-          >
-            {obj}
+    <div className="w-screen 2xl:w-1/3 xl:w-1/3 lg:w-1/2 md:w-1/2 flex-col ">
+      {showBoard === BoardStatus.Closed ? (
+        <>
+          <div className="navbar bg-base-100 shadow-xl rounded-custom">
+            <div className="flex-1 items-center justify-center space-x-2 m-1">
+              <input
+                className="input input-bordered w-full"
+                type="text"
+                value={keyword}
+                onChange={(e) => {
+                  dispatch(keywordOnChange(e.target.value));
+                }}
+              />
+              <button
+                className="btn btn-active btn-neutral shadow-xl"
+                onClick={async () => {
+                  if (keyword !== "" && ingredientList.length < 10) {
+                    const res = await requestIngredient(keyword);
+                    dispatch(deleteKeyword());
+                    dispatch(ingredientSearchResOnChange(res));
+                  } else {
+                    openModal();
+                  }
+                }}
+              >
+                Search
+              </button>
+            </div>
           </div>
-        );
-      })}
+          <div className="relative">
+            {ingredientSearchRes.length !== 0 && (
+              <div className="card bg-base-100 shadow-xl m-1 absolute top-0 left-0 z-10 w-full">
+                <div className="card-body">
+                  <h2 className="card-title">
+                    <p className="text-center uppercase">Ingredients</p>
+                  </h2>
+
+                  <div className="overflow-x-auto overflow-y-scroll h-[400px]">
+                    <table className="table">
+                      <thead></thead>
+                      <tbody>
+                        {ingredientSearchRes.map((obj, i) => {
+                          return (
+                            <tr
+                              key={i}
+                              onClick={() => {
+                                dispatch(ingredientSearchResOnChange([]));
+                                dispatch(setChosenIngredient(obj));
+                                dispatch(
+                                  setShowBoard(BoardStatus.IngredientBoard)
+                                );
+                              }}
+                            >
+                              <th>{i + 1}</th>
+                              <th className="text-wrap">{obj}</th>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </>
+      ) : (
+        <div className="navbar bg-base-100 shadow-xl rounded-custom">
+          <div className="flex-1 items-center justify-center space-x-2 m-1">
+            <h1>Good-Bye-Stale</h1>
+          </div>
+        </div>
+      )}
+
       {showBoard === BoardStatus.IngredientBoard && (
         <IngredientBoard index={null} />
       )}
-      {showBoard === BoardStatus.SavedRecipesList && <SavedRecipes />}
+      {showBoard === BoardStatus.ModifyIngredientBoard && (
+        <IngredientBoard index={ingredientIndex} />
+      )}
+      <div>
+        <Warning
+          closeModal={closeModal}
+          title="Search Error"
+          text="No Keyword or You already have 10 ingredients in your list."
+        />
+      </div>
     </div>
   );
 };

@@ -15,17 +15,25 @@ export default function SavedRecipes() {
   }, []);
 
   return (
-    <div>
-      SavedRecipes
+    <div className="overflow-y-scroll h-[500px]">
       {recipeOpt.map((obj, i) => {
         return (
           <div
+            className="card w-full bg-base-100 shadow-xl m-1"
             key={i}
             onClick={() => {
               dispatch(setRecipe(obj));
             }}
           >
-            <Link href="/recipe">{obj.slice(0, 20)} ...</Link>
+            <div className="card-body">
+              <h2 className="card-title">{obj.split("★")[0]}</h2>
+              <p>{obj.split("★")[1].slice(0, 50)} ...</p>
+              <div className="card-actions justify-end">
+                <Link href="/recipe">
+                  <button className="btn btn-primary">Check it out</button>
+                </Link>
+              </div>
+            </div>
           </div>
         );
       })}

@@ -9,7 +9,7 @@ export interface Ingredient {
 }
 
 interface ModifyIngredientPayload {
-  index: number;
+  index: number | null;
   ingredient: Ingredient;
 }
 
@@ -38,7 +38,9 @@ export const ingredientListSlice = createSlice({
       action: PayloadAction<ModifyIngredientPayload>
     ) => {
       const { index, ingredient } = action.payload;
-      state.value.splice(index, 1, ingredient);
+      if (index !== null) {
+        state.value.splice(index, 1, ingredient);
+      }
     },
   },
 });

@@ -8,6 +8,7 @@ import chosenIngredientSlice from "./features/chosenIngredient/chosenIngredientS
 import showBoardSlice from "./features/showBoard/showBoardSlice";
 import seasoningListSlice from "./features/seasoningList/seasoningListSlice";
 import recipeSlice from "./features/recipe/recipeSlice";
+import ingredientIndexSlice from "./features/ingredientIndex/ingredientIndexSlice";
 export const store = configureStore({
   reducer: {
     keyword: keywordSlice,
@@ -17,6 +18,7 @@ export const store = configureStore({
     showBoard: showBoardSlice,
     seasoningList: seasoningListSlice,
     recipe: recipeSlice,
+    ingerdientIndex: ingredientIndexSlice,
   },
 });
 export type RootState = ReturnType<typeof store.getState>;
