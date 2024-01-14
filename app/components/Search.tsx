@@ -16,7 +16,9 @@ import {
 } from "@/lib/features/showBoard/showBoardSlice";
 import { primaryButtonStyle } from "@/util/styles";
 import SavedRecipes from "./SavedRecipes";
+import { useEffect } from "react";
 import Warning from "./Warning";
+import { setRecipe } from "@/lib/features/recipe/recipeSlice";
 const Search = () => {
   const dispatch = useDispatch();
   const keyword = useSelector((state: RootState) => state.keyword.value);
@@ -37,6 +39,10 @@ const Search = () => {
       modal.showModal();
     }
   };
+
+  useEffect(() => {
+    dispatch(setRecipe(""));
+  }, []);
 
   const closeModal = (): void => {
     const modal = document.getElementById("my_modal");

@@ -152,12 +152,8 @@ export default function Ingredients() {
           disabled={ingredientList.length !== 0 ? false : true}
           className="btn btn-sm m-1"
           onClick={async () => {
-            // if (ingredientList.length !== 0) {
             const data = await requestRecipe(ingredientList, seasoningList);
             dispatch(setRecipe(data));
-            // } else {
-            //   openModal();
-            // }
           }}
         >
           <Link href="/recipe">Submit</Link>

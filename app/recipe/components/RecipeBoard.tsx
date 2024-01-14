@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import type { RootState } from "@/lib/store";
 import RecipeStep from "./RecipeStep";
@@ -9,8 +9,10 @@ import { FacebookShareButton, FacebookIcon } from "next-share";
 import { TwitterShareButton, TwitterIcon } from "next-share";
 import { WhatsappShareButton, WhatsappIcon } from "next-share";
 import { back, copy, previous, save, next, divider } from "@/assets/icons";
+import { setRecipe } from "@/lib/features/recipe/recipeSlice";
 
 export default function RecipeBoard() {
+  const dispatch = useDispatch();
   const [index, setIndex] = useState<number>(0);
 
   const recipe = useSelector((state: RootState) => state.recipe.value).split(
@@ -36,7 +38,7 @@ export default function RecipeBoard() {
     }
   };
 
-  if (recipe.length === 0) {
+  if (recipeForSaving === "") {
     return (
       <div className="h-screen">
         <button className="btn">
