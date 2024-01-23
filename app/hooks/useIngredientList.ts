@@ -26,7 +26,7 @@ const useIngredientList = () => {
     } catch (e) {
       console.error(e);
     }
-  }, [dispatch]);
+  }, [dispatch, ingredientList.length]);
 
   useEffect(() => {
     console.log(ingredientList, " saving the ingredient list");
