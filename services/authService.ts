@@ -3,7 +3,7 @@
 export const login = async (email: string, password: string) => {
   try {
     const data = { email, password };
-    const response = await fetch("http://104.131.68.243:3001/users/login", {
+    const response = await fetch("https://windyrecipe.com/users/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -20,6 +20,7 @@ export const login = async (email: string, password: string) => {
     }
 
     const responseData = await response.json();
+    console.log({ token: responseData.token, email: email }, " data");
     return { token: responseData.token, email: email };
   } catch (e) {
     console.error("Login error:", e);
