@@ -1,5 +1,7 @@
 "use client";
 import { setRecipe } from "@/lib/features/recipe/recipeSlice";
+import { requestRecipe } from "@/services/recipeService";
+import { getRecipe } from "@/services/windyService";
 import Link from "next/link";
 import React from "react";
 import { useEffect, useState } from "react";
@@ -12,6 +14,10 @@ export default function SavedRecipes() {
     const localData = localStorage.getItem("recipes");
     let recipeList: string[] = localData ? JSON.parse(localData) : [];
     setRecipeOpt(recipeList);
+
+    getRecipe().then((res) => {
+      console.log(res);
+    });
   }, []);
 
   return (
