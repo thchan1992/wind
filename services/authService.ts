@@ -14,7 +14,9 @@ export interface RegisterResponse {
 const LOGIN_API = "https://windyrecipe.com/users/login";
 
 const REGISTER_API = "https://windyrecipe.com/users";
-const DEV_API = "http://localhost:3001/users/login";
+const DEV_API = "http://localhost:3001/";
+const DEV_REGISTER_API = "http://localhost:3001/users";
+const DEV_LOGIN_API = "http://localhost:3001/users/login";
 
 export const login = async (
   email: string,

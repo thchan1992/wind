@@ -10,6 +10,7 @@ import { TwitterShareButton, TwitterIcon } from "next-share";
 import { WhatsappShareButton, WhatsappIcon } from "next-share";
 import { back, copy, previous, save, next, divider } from "@/assets/icons";
 import { setRecipe } from "@/lib/features/recipe/recipeSlice";
+import { addRecipe } from "@/services/windyService";
 
 export default function RecipeBoard() {
   const dispatch = useDispatch();
@@ -20,21 +21,28 @@ export default function RecipeBoard() {
   );
 
   const recipeForSaving = useSelector((state: RootState) => state.recipe.value);
-  const saveRecipe = () => {
+  const saveRecipe = async () => {
     // localStorage.removeItem("recipes");
-    try {
-      const localData = localStorage.getItem("recipes");
-      let recipeList: string[] = localData ? JSON.parse(localData) : [];
-      console.log(recipeList, "recipeList");
-      if (!recipeList.includes(recipeForSaving)) {
-        recipeList.push(recipeForSaving);
-        localStorage.setItem("recipes", JSON.stringify(recipeList));
-        console.log("Recipe saved");
-      } else {
-        console.log("Same recipe exists");
-      }
-    } catch (e) {
-      console.error(e);
+    // try {
+    //   const localData = localStorage.getItem("recipes");
+    //   let recipeList: string[] = localData ? JSON.parse(localData) : [];
+    //   console.log(recipeList, "recipeList");
+    //   if (!recipeList.includes(recipeForSaving)) {
+    //     recipeList.push(recipeForSaving);
+    //     localStorage.setItem("recipes", JSON.stringify(recipeList));
+    //     console.log("Recipe saved");
+    //   } else {
+    //     console.log("Same recipe exists");
+    //   }
+    // } catch (e) {
+    //   console.error(e);
+    // }
+
+    const res = await addRecipe(recipeForSaving);
+    if (res?.success) {
+      console.log("Recipe Saved");
+    } else {
+      console.log("Log in failed.");
     }
   };
 
