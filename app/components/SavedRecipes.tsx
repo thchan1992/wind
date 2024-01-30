@@ -14,7 +14,7 @@ export default function SavedRecipes() {
   }
   const dispatch = useDispatch();
   const [recipeOpt, setRecipeOpt] = useState<RecipeListResponse[] | []>([]);
-  const [isLoading, setIsLoading] = useState(false);
+
 
   useEffect(() => {
     // const localData = localStorage.getItem("recipes");
@@ -23,7 +23,6 @@ export default function SavedRecipes() {
 
     getRecipe().then((res: RecipeListResponse[]) => {
       console.log(res);
-
       // const recipes = res.map((obj: RecipeListResponse) => {
       //   console.log(obj.title);
       //   return { id: obj._id, recipe: obj.title.concat("★" + obj.steps + "★") };

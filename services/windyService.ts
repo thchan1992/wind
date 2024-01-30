@@ -92,9 +92,9 @@ export const getRecipe = async () => {
   try {
     const response = await fetch(GET_RECEIPE_API, {
       method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      // headers: {
+      //   "Content-Type": "application/json",
+      // },
       credentials: "include",
     });
 
@@ -113,6 +113,8 @@ export const getRecipe = async () => {
     }
 
     const data = await response.json();
+    console.log("recipe data", response.status);
+    console.log(response);
     return data;
     // console.log(data);
   } catch (error) {

@@ -3,7 +3,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../../lib/store";
-import { login, register } from "@/services/authService";
+import {
+  login,
+  register,
+  logoutAccount,
+  verifyCookie,
+} from "@/services/authService";
 import { logout, setAuth } from "@/lib/features/auth/authSlice";
 
 export default function AuthHeader() {
@@ -20,8 +25,16 @@ export default function AuthHeader() {
 
   useEffect(() => {
     try {
+      verifyCookie().then((res) => {
+        if (res?.success) {
+          dispatch(setAuth({ isLogin: true, email: "" }));
+          console.log(auth, " auth status");
+        } else {
+          // setAuth({ isLogin: false, email: "" });
+        }
+      });
     } catch (e) {}
-  });
+  }, []);
 
   function isValidEmail(email: string): boolean {
     return /\S+@\S+\.\S+/.test(email);
@@ -30,9 +43,11 @@ export default function AuthHeader() {
     setIsLoading(true);
     if (isValidEmail(email) && password) {
       const res = await login(email, password);
+      console.log(res);
       if (res.success) {
-        console.log("log in ok");
+        console.log(res.success);
         dispatch(setAuth({ isLogin: true, email: email }));
+        console.log(auth, " auth status");
         const modal = document.getElementById(
           "auth_modal_1"
         ) as HTMLDialogElement | null;
@@ -74,34 +89,36 @@ export default function AuthHeader() {
     setIsLoading(false);
   };
 
-  const handleLogout = async () => {
+  const handleLogout = () => {
+    logoutAccount();
     dispatch(logout());
+    if (typeof window !== "undefined") {
+      window.location.reload();
+    }
   };
 
   return (
     <div className={"flex"}>
-      {auth.isLogin ? (
-        <div>
-          welcome back
+      {auth.isLogin === true ? (
+        <div className={"flex row-auto"}>
+          <div className={"m-3"}>
+            <h1>Welcome back! You can save the recipe to your account!</h1>
+          </div>
           <div>
-            <label>
-              <div className="label"></div>
-              <button
-                className={"btn m-1"}
-                onClick={() => {
-                  handleLogout();
-                }}
-              >
-                Log out
-              </button>
-              <div className="label"></div>
-            </label>
+            <button
+              className={"btn m-1"}
+              onClick={() => {
+                handleLogout();
+              }}
+            >
+              Log out
+            </button>
           </div>
         </div>
       ) : (
         <div>
           <button
-            className="btn"
+            className="btn m-3"
             onClick={() => {
               setShowSignup(false);
               const modal = document.getElementById(
@@ -117,7 +134,7 @@ export default function AuthHeader() {
             Log in
           </button>
           <button
-            className="btn"
+            className="btn m-3"
             onClick={() => {
               setShowSignup(true);
 
@@ -172,7 +189,7 @@ export default function AuthHeader() {
               />
               {!showSignup && (
                 <div className="label">
-                  <span className="label-text-alt">Forgot password</span>
+                  {/* <span className="label-text-alt">Forgot password</span> */}
                 </div>
               )}
             </label>

@@ -28,6 +28,8 @@ export default function Ingredients() {
   const seasoningList = useSelector(
     (state: RootState) => state.seasoningList.value
   );
+
+  const auth = useSelector((state: RootState) => state.auth);
   const showBoard = useSelector((state: RootState) => state.showBoard.value);
 
   const openModal = (): void => {
@@ -132,21 +134,23 @@ export default function Ingredients() {
           >
             Seasonings
           </a>
-          <a
-            role="tab"
-            className={
-              showBoard === BoardStatus.SavedRecipesList
-                ? "tab tab-active"
-                : "tab"
-            }
-            onClick={() => {
-              showBoard === BoardStatus.SavedRecipesList
-                ? dispatch(setShowBoard(BoardStatus.SavedRecipesList))
-                : dispatch(setShowBoard(BoardStatus.SavedRecipesList));
-            }}
-          >
-            Saved Recipes
-          </a>
+          {auth.isLogin && (
+            <a
+              role="tab"
+              className={
+                showBoard === BoardStatus.SavedRecipesList
+                  ? "tab tab-active"
+                  : "tab"
+              }
+              onClick={() => {
+                showBoard === BoardStatus.SavedRecipesList
+                  ? dispatch(setShowBoard(BoardStatus.SavedRecipesList))
+                  : dispatch(setShowBoard(BoardStatus.SavedRecipesList));
+              }}
+            >
+              Saved Recipes
+            </a>
+          )}
         </div>
         <button
           disabled={ingredientList.length !== 0 ? false : true}

@@ -14,6 +14,7 @@ import { addRecipe } from "@/services/windyService";
 
 export default function RecipeBoard() {
   const dispatch = useDispatch();
+  const auth = useSelector((state: RootState) => state.auth);
   const [index, setIndex] = useState<number>(0);
 
   const recipe = useSelector((state: RootState) => state.recipe.value).split(
@@ -96,15 +97,17 @@ export default function RecipeBoard() {
           <button className="btn btn-warning">
             <Link href="/">{back}Back</Link>
           </button>
-          <button
-            className="btn btn-success"
-            onClick={() => {
-              saveRecipe();
-            }}
-          >
-            {save}
-            Save
-          </button>
+          {auth.isLogin && (
+            <button
+              className="btn btn-success"
+              onClick={() => {
+                saveRecipe();
+              }}
+            >
+              {save}
+              Save
+            </button>
+          )}
         </div>
         <div className="flex flex-col w-full p-1">
           <div className="divider divider-error">Share</div>

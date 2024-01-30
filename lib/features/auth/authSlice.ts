@@ -26,6 +26,7 @@ export const authSlice = createSlice({
   reducers: {
     setAuth: (state, action: PayloadAction<UserData>) => {
       // state.token = action.payload.token;
+      state.isLogin = true;
       state.email = action.payload.email;
     },
     logout: (state) => {
