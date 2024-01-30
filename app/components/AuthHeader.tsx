@@ -179,7 +179,7 @@ export default function AuthHeader() {
                 <span className="label-text">Password</span>
               </div>
               <input
-                type="text"
+                type="password"
                 value={password}
                 onChange={(e) => {
                   setPassword(e.target.value);
@@ -199,7 +199,7 @@ export default function AuthHeader() {
                   <span className="label-text">Confirm Password</span>
                 </div>
                 <input
-                  type="text"
+                  type="password"
                   value={confirmPassword}
                   onChange={(e) => {
                     setConfirmPassword(e.target.value);
