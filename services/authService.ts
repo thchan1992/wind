@@ -130,8 +130,25 @@ export const logoutAccount = async () => {
       credentials: "include",
     });
 
-    const data = await response.json();
-    console.log(data);
+    if (!response.ok) {
+      if (response.status === 401) {
+        return {
+          success: false,
+          message: "Unauthorised: Incorrect email or password.",
+        };
+      }
+
+      const errorText = response.statusText || (await response.text());
+      throw new Error(
+        `HTTP error! status: ${response.status}, message: ${errorText}`
+      );
+    }
+
+    // the status is in the range 200–299
+    return {
+      success: true,
+    };
+    return;
   } catch (e) {
     console.error(e);
   }

@@ -59,8 +59,9 @@ export default function Ingredients() {
                     <div className="card-body">
                       <div className="flex">
                         <div className="flex flex-grow m-0.5">
-                          {ingredient.ingredient} {ingredient.quantity}{" "}
-                          {ingredient.unit}
+                          {ingredient.ingredient.toUpperCase()}
+                          {" = "}
+                          {ingredient.quantity} {ingredient.unit.toUpperCase()}
                         </div>
                         <div className="item-center m-0.5">
                           <button

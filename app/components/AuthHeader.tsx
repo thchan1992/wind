@@ -22,6 +22,7 @@ export default function AuthHeader() {
   const [showSignup, setShowSignup] = useState(false);
   const [status, setStatus] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [logoutError, setLogoutError] = useState("");
 
   useEffect(() => {
     try {
@@ -89,11 +90,20 @@ export default function AuthHeader() {
     setIsLoading(false);
   };
 
-  const handleLogout = () => {
-    logoutAccount();
-    dispatch(logout());
-    if (typeof window !== "undefined") {
-      window.location.reload();
+  const handleLogout = async () => {
+    try {
+      const response = await logoutAccount();
+      if (response && response.success) {
+        if (typeof window !== "undefined") {
+          dispatch(logout());
+          window.location.reload();
+        }
+      } else {
+        setLogoutError(response?.message || "Logout failed.");
+      }
+    } catch (err) {
+      console.error("Logout error:", err);
+      setLogoutError("An error occurred during logout.");
     }
   };
 
