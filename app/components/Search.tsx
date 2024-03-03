@@ -121,7 +121,7 @@ const Search = () => {
       ) : (
         <div className="navbar bg-base-100 shadow-xl rounded-custom">
           <div className="flex-1 items-center justify-center space-x-2 m-1">
-            <h1>Good-Bye-Stale</h1>
+            <h1>Wind-Recipe</h1>
           </div>
         </div>
       )}

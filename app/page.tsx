@@ -8,8 +8,9 @@ export default function Home() {
   return (
     <div className={"flex flex-col items-center p-5 h-screen"}>
       <h1 className={"font-extrabold"}>
-        (Beta Version) For an improved experience, using Chrome is recommended.
+        For an improved experience, using Chrome is recommended.
       </h1>
+      <h1 className={"font-extrabold"}>For educational use only</h1>
       <AuthHeader />
       <Search />
       <Ingredients />
