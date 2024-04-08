@@ -5,7 +5,7 @@ import { ReduxProvider } from "@/lib/provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Wind Recipe",
+  title: "Recipe by Chan",
   description: "To reduce food waste!",
 };
 
