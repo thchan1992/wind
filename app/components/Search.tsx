@@ -52,9 +52,9 @@ const Search = () => {
   };
 
   return (
-    <div className="w-screen 2xl:w-1/3 xl:w-1/3 lg:w-1/2 md:w-1/2 flex-col ">
+    <div className="sticky top-20 w-screen 2xl:w-1/3 xl:w-1/3 lg:w-1/2 md:w-1/2 flex-col z-50">
       {showBoard === BoardStatus.Closed ? (
-        <>
+        <div>
           <div className="navbar bg-base-100 shadow-xl rounded-custom">
             <div className="flex-1 items-center justify-center space-x-2 m-1">
               <input
@@ -117,11 +117,13 @@ const Search = () => {
               </div>
             )}
           </div>
-        </>
+        </div>
       ) : (
-        <div className="navbar bg-base-100 shadow-xl rounded-custom">
-          <div className="flex-1 items-center justify-center space-x-2 m-1">
-            <h1>Wind-Recipe</h1>
+        <div>
+          <div className="navbar bg-base-100 shadow-xl rounded-custom">
+            <div className="flex-1 items-center justify-center space-x-2 m-1">
+              <h1>Seasoning</h1>
+            </div>
           </div>
         </div>
       )}

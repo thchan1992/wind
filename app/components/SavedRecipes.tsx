@@ -15,7 +15,6 @@ export default function SavedRecipes() {
   const dispatch = useDispatch();
   const [recipeOpt, setRecipeOpt] = useState<RecipeListResponse[] | []>([]);
 
-
   useEffect(() => {
     // const localData = localStorage.getItem("recipes");
     // let recipeList: string[] = localData ? JSON.parse(localData) : [];
@@ -35,6 +34,7 @@ export default function SavedRecipes() {
   useEffect(() => {});
 
   const handleDelete = async (recipeId: string) => {
+    console.log(recipeId, "recipeId");
     const res = await deleteRecipe(recipeId);
     if (res?.success) {
       console.log("Recipe deleted");
@@ -49,36 +49,42 @@ export default function SavedRecipes() {
   };
 
   return (
-    <div className="overflow-y-scroll h-[500px]">
-      {recipeOpt.map((obj, i) => {
-        return (
-          <div
-            className="card w-full bg-base-100 shadow-xl m-1"
-            key={i}
-            onClick={() => {
-              dispatch(setRecipe(obj.title.concat("★" + obj.steps)));
-            }}
-          >
-            <div className="card-body">
-              <h2 className="card-title">{obj.title}</h2>
-              <p>{obj.steps.split("★")[0].slice(0, 50)} ...</p>
-              <div className="card-actions justify-end">
-                <Link href="/recipe">
-                  <button className="btn btn-primary">Check it out</button>
-                </Link>
-                <button
-                  className="btn btn-primary"
-                  onClick={() => {
-                    handleDelete(obj._id);
-                  }}
-                >
-                  Delete
-                </button>
+    <div className=" flex h-full ">
+      {recipeOpt.length > 0 ? (
+        recipeOpt.map((obj, i) => {
+          return (
+            <div
+              className="card w-full bg-base-100 shadow-xl m-1"
+              key={i}
+              onClick={() => {
+                dispatch(setRecipe(obj.title.concat("★" + obj.steps)));
+              }}
+            >
+              <div className="card-body">
+                <h2 className="card-title">{obj.title}</h2>
+                <p>{obj.steps.split("★")[0].slice(0, 50)} ...</p>
+                <div className="card-actions justify-end">
+                  <Link href="/recipe">
+                    <button className="btn btn-primary">Check it out</button>
+                  </Link>
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => {
+                      handleDelete(obj._id);
+                    }}
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })
+      ) : (
+        <div className="flex justify-center items-center w-full overflow-auto h-10 ">
+          <h1>No Receipe</h1>
+        </div>
+      )}
     </div>
   );
 }

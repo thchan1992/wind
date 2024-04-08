@@ -59,9 +59,9 @@ export default function RecipeBoard() {
   }
 
   return (
-    <div className="w-screen 2xl:w-1/3 xl:w-1/3 lg:w-1/2 md:w-1/2 flex-col m-2">
-      <div className="grid flex-grow card bg-base-300 rounded-box place-items-center overflow-y-scroll h-[500px]">
-        <div className="card bg-base-100 shadow-xl m-2 w-5/6 h-[300px]  overflow-y-scroll">
+    <div className="w-screen 2xl:w-1/3 xl:w-1/3 lg:w-1/2 md:w-1/2 flex-col m-2 h-full">
+      <div className="grid flex-grow card bg-base-300 rounded-box place-items-center h-full">
+        <div className="card bg-base-100 shadow-xl m-2 w-5/6 h-[300px] overflow-auto">
           <div className="card-body text-wrap">
             <RecipeStep step={recipe[index]} />
           </div>
@@ -94,7 +94,7 @@ export default function RecipeBoard() {
         </div>
 
         <div className="flex items-center">
-          <button className="btn btn-warning">
+          <button className="btn btn-warning m-1">
             <Link href="/">{back}Back</Link>
           </button>
           {auth.isLogin && (

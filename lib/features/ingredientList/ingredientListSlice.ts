@@ -28,10 +28,15 @@ export const ingredientListSlice = createSlice({
       state.value = [action.payload, ...state.value];
     },
     deleteIngredientFromList: (state, action: PayloadAction<number>) => {
-      const newArr: Ingredient[] = state.value.filter((obj, index) => {
-        return index !== action.payload;
-      });
-      state.value = newArr;
+      if (state.value.length === 1) {
+        state.value = [];
+      } else {
+        const newArr: Ingredient[] = state.value.filter((obj, index) => {
+          return index !== action.payload;
+        });
+        console.log(newArr, "newArr");
+        state.value = newArr;
+      }
     },
     modifyIngredientFromList: (
       state,

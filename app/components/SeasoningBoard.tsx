@@ -36,8 +36,8 @@ export default function SeasoningBoard() {
   };
 
   return (
-    <div className="flex w-full">
-      <div className="grid flex-grow card bg-base-300 rounded-box place-items-center overflow-y-scroll h-[500px]">
+    <div className="flex w-full h-full">
+      <div className="grid flex-grow card bg-base-300 rounded-box justify-center overflow-y-scroll h-full">
         <ul className="menu bg-base-200 w-40 rounded-box m-4">
           <li className="menu-title">Option</li>
           {seasoningOpt.map((obj, i) => {
@@ -55,7 +55,7 @@ export default function SeasoningBoard() {
         </ul>
       </div>
       <div className="divider divider-horizontal">➡️</div>
-      <div className="grid flex-grow card bg-base-300 rounded-box place-items-center overflow-y-scroll h-[500px]">
+      <div className="grid flex-grow card bg-base-300 rounded-box justify-center overflow-y-scroll h-full">
         <ul className="menu bg-base-200 w-40 rounded-box m-4">
           <li className="menu-title">Your Seasonings</li>
           {seasoningList.map((obj, i) => {

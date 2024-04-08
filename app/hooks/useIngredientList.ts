@@ -17,16 +17,16 @@ const useIngredientList = () => {
       const localData = localStorage.getItem("ingredientList");
       if (localData) {
         const ingredients: Ingredient[] = JSON.parse(localData);
-        if (ingredientList.length === 0) {
-          ingredients.forEach((ingredient) => {
-            dispatch(setIngredients(ingredient));
-          });
-        }
+        // if (ingredientList.length === 0) {
+        //   ingredients.forEach((ingredient) => {
+        //     dispatch(setIngredients(ingredient));
+        //   });
+        // }
       }
     } catch (e) {
       console.error(e);
     }
-  }, [dispatch, ingredientList.length]);
+  }, [dispatch, ingredientList]);
 
   useEffect(() => {
     console.log(ingredientList, " saving the ingredient list");

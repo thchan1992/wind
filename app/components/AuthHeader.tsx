@@ -108,10 +108,12 @@ export default function AuthHeader() {
   };
 
   return (
-    <div className={"flex"}>
+    <div
+      className={"sticky top-0 w-full border-red-400 bg-gray-500  mb-5 z-50"}
+    >
       {auth.isLogin === true ? (
-        <div className={"flex row-auto"}>
-          <div className={"m-3"}>
+        <div className="flex justify-between ">
+          <div className={"m-3 text-cyan-50"}>
             <h1>Welcome back! You can save the recipe to your account!</h1>
           </div>
           <div>
@@ -126,40 +128,45 @@ export default function AuthHeader() {
           </div>
         </div>
       ) : (
-        <div>
-          <button
-            className="btn m-3"
-            onClick={() => {
-              setShowSignup(false);
-              const modal = document.getElementById(
-                "auth_modal_1"
-              ) as HTMLDialogElement | null;
-              if (modal) {
-                modal.showModal();
-              } else {
-                console.error("Modal element not found");
-              }
-            }}
-          >
-            Log in
-          </button>
-          <button
-            className="btn m-3"
-            onClick={() => {
-              setShowSignup(true);
+        <div className="flex justify-between">
+          <div className="flex justify-center items-center">
+            <h1 className="m-3">Recipe Generation Website</h1>
+          </div>
+          <div>
+            <button
+              className="btn m-3"
+              onClick={() => {
+                setShowSignup(false);
+                const modal = document.getElementById(
+                  "auth_modal_1"
+                ) as HTMLDialogElement | null;
+                if (modal) {
+                  modal.showModal();
+                } else {
+                  console.error("Modal element not found");
+                }
+              }}
+            >
+              Log in
+            </button>
+            <button
+              className="btn m-3"
+              onClick={() => {
+                setShowSignup(true);
 
-              const modal = document.getElementById(
-                "auth_modal_1"
-              ) as HTMLDialogElement | null;
-              if (modal) {
-                modal.showModal();
-              } else {
-                console.error("Modal element not found");
-              }
-            }}
-          >
-            Sign up
-          </button>
+                const modal = document.getElementById(
+                  "auth_modal_1"
+                ) as HTMLDialogElement | null;
+                if (modal) {
+                  modal.showModal();
+                } else {
+                  console.error("Modal element not found");
+                }
+              }}
+            >
+              Sign up
+            </button>
+          </div>
         </div>
       )}
 
