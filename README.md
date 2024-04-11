@@ -2,7 +2,7 @@
 
 
 # Goodbye Stale
-Access: https://wind-kmzf.vercel.app/
+
 <img src="https://i.imgur.com/8hTku39.png" height="650" width="400"/>
 ## Introduction
 
