@@ -58,6 +58,7 @@ const Search = () => {
           <div className="navbar bg-base-100 shadow-xl rounded-custom">
             <div className="flex-1 items-center justify-center space-x-2 m-1">
               <input
+                placeholder="Search for an ingredient to start..."
                 className="input input-bordered w-full"
                 type="text"
                 value={keyword}

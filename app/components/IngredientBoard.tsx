@@ -73,11 +73,11 @@ export default function IngredientBoard({ index }: IngredientBoardProps) {
               );
             })}
           </ul>
-          <div className="flex flex-row m-2 ">
+          <div className="flex flex-row m-2">
             <input
               value={unit === "some" ? 0 : quantity}
               disabled={unit === "some" ? true : false}
-              className="input input-bordered w-full"
+              className="input input-bordered w-full border border-red-100"
               type="number"
               onChange={(e) => {
                 const value = e.target.value;
@@ -92,7 +92,7 @@ export default function IngredientBoard({ index }: IngredientBoardProps) {
 
             {showBoard === BoardStatus.ModifyIngredientBoard ? (
               <button
-                className={"btn m-1"}
+                className={"btn ml-2 border border-red-100"}
                 onClick={() => {
                   if (quantity !== 0 || unit !== "") {
                     const newIn: Ingredient = {

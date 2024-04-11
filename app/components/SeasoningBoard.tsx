@@ -37,12 +37,13 @@ export default function SeasoningBoard() {
 
   return (
     <div className="flex w-full h-full">
-      <div className="grid flex-grow card bg-base-300 rounded-box justify-center overflow-y-scroll h-full">
-        <ul className="menu bg-base-200 w-40 rounded-box m-4">
+      <div className="grid flex-grow justify-center  h-full mb-96">
+        <ul className="">
           <li className="menu-title">Option</li>
           {seasoningOpt.map((obj, i) => {
             return (
               <li
+                className="cursor-pointer bg-base-300 mb-2 p-2 rounded-md shadow-md border border-red-100"
                 key={i}
                 onClick={() => {
                   dispatch(setSeasonings(obj));
@@ -54,13 +55,14 @@ export default function SeasoningBoard() {
           })}
         </ul>
       </div>
-      <div className="divider divider-horizontal">➡️</div>
-      <div className="grid flex-grow card bg-base-300 rounded-box justify-center overflow-y-scroll h-full">
-        <ul className="menu bg-base-200 w-40 rounded-box m-4">
+      <div className="divider divider-horizontal"></div>
+      <div className="grid flex-grow   justify-center  h-auto mb-96">
+        <ul className="">
           <li className="menu-title">Your Seasonings</li>
           {seasoningList.map((obj, i) => {
             return (
               <li
+                className="cursor-pointer bg-base-300 mb-2 p-2 rounded-md shadow-md border border-red-100"
                 key={i}
                 onClick={() => {
                   handleRemoveSeasoning(obj, i);
